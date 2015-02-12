@@ -1,6 +1,6 @@
 {
   "name": "koa-geo-ip",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Uses ip to append geolocation using MaxMind DB files",
   "main": "lib/index.js",
   "files": [
