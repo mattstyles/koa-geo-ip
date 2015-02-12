@@ -19,6 +19,7 @@
   },
   "keywords": [
     "koa",
+    "middleware",
     "geoip",
     "geolocation",
     "ip",
