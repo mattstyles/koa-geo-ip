@@ -1,1 +1,53 @@
 #!/usr/bin/env node
+
+var fs = require( 'fs' );
+var path = require( 'path' );
+var zlib = require( 'zlib' );
+var util = require( 'util' );
+
+var mkdirp = require( 'mkdirp' );
+var request = require( 'superagent' );
+var argv = require( 'minimist' )( process.argv.slice( 2 ) );
+
+var dbPath = process.env.npm_package_config_db || argv.db;
+var installPath = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz';
+
+if ( !dbPath ) {
+    console.error( 'Error: Specify db using --db' );
+    process.exit( 1 );
+}
+
+try {
+    util.log( 'Locating db' );
+    fs.accessSync( dbPath );
+} catch ( err ) {
+    if ( err.code === 'ENOENT' ) {
+        util.log( 'Database not found at ', dbPath );
+        install();
+        return;
+    }
+
+    util.log( 'Uncaught error finding db at', dbPath );
+    process.exit( 1 );
+}
+
+util.log( 'Database found at', dbPath );
+util.log( 'GeoIP data already available - skipping install' );
+process.exit( 0 );
+
+function install() {
+    util.log( 'Attempting to install geo db' );
+
+    mkdirp.sync( path.dirname( dbPath ) );
+
+    request
+        .get( installPath )
+        .on( 'error', function( err ) {
+            console.error( 'Error streaming db', err );
+        })
+        .pipe( zlib.createGunzip() )
+        .pipe( fs.createWriteStream( dbPath ) )
+        .end( function() {
+            util.log( 'Installation successful' );
+        });
+}
