@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/**
+ * GeoIP2 install script
+ *   @arg --db specifies path to install to
+ */
+
 var fs = require( 'fs' );
 var path = require( 'path' );
 var zlib = require( 'zlib' );
@@ -10,7 +15,7 @@ var request = require( 'superagent' );
 var argv = require( 'minimist' )( process.argv.slice( 2 ) );
 
 var dbPath = process.env.npm_package_config_db || argv.db;
-var installPath = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz';
+var installPath = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz';
 
 if ( !dbPath ) {
     console.error( 'Error: Specify db using --db' );

@@ -10,7 +10,7 @@
     "installdb": "bin/installdb"
   },
   "scripts": {
-    "installdb": "./bin/installdb",
+    "geoip": "./bin/geoip",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "config": {
