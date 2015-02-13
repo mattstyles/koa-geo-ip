@@ -15,9 +15,10 @@ var util = require( 'util' );
 var mkdirp = require( 'mkdirp' );
 var Progress = require( 'progress' );
 var request = require( 'request' );
+var osenv = require( 'osenv' );
 var argv = require( 'minimist' )( process.argv.slice( 2 ) );
 
-var dbPath = process.env.npm_package_config_geodb || argv.db;
+var dbPath = path.join( osenv.home(), process.env.npm_package_config_geodb ) || argv.db;
 var installPath = 'http://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.mmdb.gz';
 
 if ( !dbPath ) {

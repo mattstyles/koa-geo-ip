@@ -1,4 +1,9 @@
 
+# 0.3.0
+
+* Single arity wrapper function
+* Examples and docs
+
 # 0.2.0
 
 * Update useable ip
