@@ -46,6 +46,7 @@
     "superagent": "^0.21.0"
   },
   "dependencies": {
+    "lodash.defaults": "^3.0.0",
     "maxmind-db-reader": "^0.2.0",
     "osenv": "^0.1.0"
   }
